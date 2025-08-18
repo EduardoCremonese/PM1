@@ -9,6 +9,6 @@ public interface ListaDesejosRepository extends JpaRepository<ListaDesejos, Long
 
     boolean existsByUsuarioId(Long usuarioId);
 
-    // Novo método para buscar pelo ID do usuário
     Optional<ListaDesejos> findByUsuarioId(Long usuarioId);
 }
+
