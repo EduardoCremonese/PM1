@@ -23,11 +23,9 @@ public class ListaDesejosService {
         this.produtoRepository = produtoRepository;
     }
 
-    // --------- CRUD BÁSICO ---------
 
     @Transactional
     public ListaDesejos criar(ListaDesejos lista) {
-        // RN #2 (exigida): lançar exception em Service
         if (lista.getUsuario() == null || lista.getUsuario().getId() == null) {
             throw new RegraNegocioException("Lista de desejos precisa estar associada a um usuário.");
         }
@@ -45,11 +43,9 @@ public class ListaDesejosService {
         ListaDesejos existente = listaDesejosRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Lista de desejos não encontrada para atualização"));
 
-        // Se desejar permitir troca do usuário dono da lista:
         if (dto.getUsuario() != null && dto.getUsuario().getId() != null) {
             Long novoUsuarioId = dto.getUsuario().getId();
 
-            // Impede que o novo usuário fique com duas listas
             if (listaDesejosRepository.existsByUsuarioId(novoUsuarioId)
                     && !novoUsuarioId.equals(existente.getUsuario().getId())) {
                 throw new RegraNegocioException("Usuário selecionado já possui uma lista de desejos.");
@@ -57,7 +53,6 @@ public class ListaDesejosService {
             existente.setUsuario(dto.getUsuario());
         }
 
-        // Atualização dos produtos, se enviado:
         if (dto.getProdutos() != null) {
             existente.setProdutos(dto.getProdutos());
         }
@@ -90,7 +85,6 @@ public class ListaDesejosService {
         listaDesejosRepository.deleteById(id);
     }
 
-    // --------- OPERAÇÕES DE PRODUTOS NA LISTA ---------
 
     @Transactional
     public ListaDesejos adicionarProduto(Long listaId, Long produtoId) {
@@ -98,7 +92,6 @@ public class ListaDesejosService {
         Produto produto = produtoRepository.findById(produtoId)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado"));
 
-        // Evita duplicata
         boolean jaExiste = lista.getProdutos().stream()
                 .anyMatch(p -> p.getId().equals(produto.getId()));
         if (!jaExiste) {
@@ -120,3 +113,4 @@ public class ListaDesejosService {
         return listaDesejosRepository.save(lista);
     }
 }
+
