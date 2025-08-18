@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/enderecos")
-@RequiredArgsConstructor // Gera construtor com 'service' para injeção automática
+@RequiredArgsConstructor 
 public class EnderecoController {
 
     private final EnderecoService service;
@@ -39,3 +39,4 @@ public class EnderecoController {
         service.excluir(id);
     }
 }
+
