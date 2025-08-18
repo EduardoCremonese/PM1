@@ -18,7 +18,6 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
-    // ===== CRUD =====
     @Transactional
     public Produto salvar(Produto produto) {
         return produtoRepository.save(produto);
@@ -55,7 +54,6 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    // ===== MÉTODOS USADOS NO CONTROLLER =====
     @Transactional(readOnly = true)
     public List<Produto> buscarPorNome(String nome) {
         return produtoRepository.findByNomeIgnoreCaseContaining(nome);
@@ -75,6 +73,7 @@ public class ProdutoService {
 
     @Transactional
     public void excluir(Long id) {
-        deletar(id); // alias para compatibilizar com o Controller
+        deletar(id); 
     }
 }
+
