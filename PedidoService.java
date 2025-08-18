@@ -1,4 +1,4 @@
-package com.ecommerce.service; // ajuste se necessário
+package com.ecommerce.service; 
 
 import com.ecommerce.model.Pedido;
 import com.ecommerce.repository.PedidoRepository;
@@ -28,11 +28,8 @@ public class PedidoService {
             throw new RegraNegocioException("Status de pedido inválido. Use ABERTO, FECHADO ou CANCELADO.");
         }
 
-        // regra extra ilustrativa: impedir pedido sem itens (se sua entidade tiver a lista de itens)
-        // if (pedido.getItens() == null || pedido.getItens().isEmpty()) {
-        //     throw new RegraNegocioException("Pedido precisa ter pelo menos um item.");
-        // }
-
+    
         return pedidoRepository.save(pedido);
     }
 }
+
