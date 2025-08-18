@@ -18,7 +18,6 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // ========= CRUD =========
 
     @Transactional
     public Usuario salvar(Usuario usuario) {
@@ -61,7 +60,6 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    // ========= NOVOS MÉTODOS =========
 
     @Transactional(readOnly = true)
     public Usuario buscarPorNome(String nome) {
@@ -75,7 +73,6 @@ public class UsuarioService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com esse e-mail"));
     }
 
-    // ========= REGRAS DE NEGÓCIO =========
 
     private void aplicarRegraStatusCadastro(Usuario usuario) {
         if (usuario.getTelefone() == null || usuario.getTelefone().isBlank()) {
@@ -93,3 +90,4 @@ public class UsuarioService {
                 });
     }
 }
+
