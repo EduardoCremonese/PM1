@@ -1,4 +1,4 @@
-package com.ecommerce.controller; // ajuste se necessário
+package com.ecommerce.controller; 
 
 import com.ecommerce.model.Pedido;
 import com.ecommerce.repository.PedidoRepository;
@@ -15,12 +15,10 @@ public class PedidoController {
     public PedidoController(PedidoRepository pedidoRepository) {
         this.pedidoRepository = pedidoRepository;
     }
-
-    // ... seus endpoints CRUD existentes
-
-    // GET /pedidos/por-nome-usuario?nome=joao
+    
     @GetMapping("/por-nome-usuario")
     public List<Pedido> buscarPorNomeUsuario(@RequestParam String nome) {
         return pedidoRepository.findByNomeUsuarioLike(nome);
     }
 }
+
